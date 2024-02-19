@@ -13,7 +13,7 @@ import { GenresDto } from '../types/movie';
 export class TvShowsService {
 
   private apiUrl = 'https://api.themoviedb.org/3';
-  private apiKey = '28155b994179c0e25845fcf8555f8eff'
+  private apiKey = ''; // Enter your api key here
   constructor(private http: HttpClient) { }
 
   getTvShowsByType(type: string, count = 20) {
