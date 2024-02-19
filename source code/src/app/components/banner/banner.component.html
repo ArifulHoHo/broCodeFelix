@@ -1,0 +1,12 @@
+<div class="banner container">
+  <h1>{{ bannerTitle }}</h1>
+  <div class="grid">
+    @for (show of content; track $index) {
+    <div class="col-2">
+      <app-show-item [showItem]="show" [showType]="showType"></app-show-item>
+    </div>
+    }@empty {
+    <h1 class="container">No upcoming movies available!</h1>
+    }
+  </div>
+</div>

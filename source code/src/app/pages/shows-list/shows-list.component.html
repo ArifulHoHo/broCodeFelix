@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12 search-bar">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="searchQuery"
+          (change)="searchShow()"
+        />
+      </span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-12 genres-links">
+      <ng-container *ngIf="genres$ | async as genres">
+        <div class="card flex gap-3">
+          @for (genre of genres; track $index) {
+          <div class="flex align-items-center">
+            <p-checkbox
+              label="{{ genre.name }}"
+              name="showFilter"
+              value="{{ genre.id }}"
+              [(ngModel)]="showFilter"
+              [routerLink]="'/list/' + showType + '/' + mergeFilter()"
+            ></p-checkbox>
+          </div>
+          }
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-container *ngIf="showLists$ | async as showLists">
+    <div class="grid">
+      @for (show of showLists.results; track $index) {
+      <div class="col-2">
+        <app-show-item [showItem]="show" [showType]="showType"></app-show-item>
+      </div>
+      }
+    </div>
+    @if(showLists.results.length === 0){
+
+    <p-message
+      severity="info"
+      text="Search keyword provided 0 results!"
+    ></p-message>
+
+    }@else {
+    <div class="grid">
+      <div class="col-12">
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [rows]="20"
+          [first]="first"
+          [totalRecords]="showLists.total_results"
+        ></p-paginator>
+      </div>
+    </div>
+    }
+  </ng-container>
+</div>
