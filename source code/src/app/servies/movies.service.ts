@@ -10,7 +10,7 @@ import { CreditsDto } from '../types/credits';
 export class MoviesService {
 
   private apiUrl = 'https://api.themoviedb.org/3';
-  private apiKey = '28155b994179c0e25845fcf8555f8eff'
+  private apiKey = ''; // enter apikey here
   constructor(private http: HttpClient) { }
 
   getMovieByType(type: string, count = 20) {
